@@ -3,20 +3,20 @@ package utils;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BaseBallValidateUtils {
+public class BaseballValidateUtils {
     public static boolean validateUserInput(String userInput) {
         if (userInput == null) {
-            System.out.println("숫자를 입력해주세요.");
+            System.out.println("[ERROR]");
             return false;
         }
 
         if (userInput.length() != 3) {
-            System.out.println("입력한 숫자를 다시 한번 확인해주세요.");
+            System.out.println("[ERROR]");
             return false;
         }
 
         if (!validateUserInputString(userInput)) {
-            System.out.println("입력한 숫자를 다시 한번 확인해주세요.2");
+            System.out.println("[ERROR]");
             return false;
         }
 
@@ -41,7 +41,7 @@ public class BaseBallValidateUtils {
         int secondNumber = Integer.parseInt(String.valueOf(userInput.charAt(1)));
         int thirdNumber = Integer.parseInt(String.valueOf(userInput.charAt(2)));
 
-        if (!isDuplicateNumber(firstNumber, secondNumber, thirdNumber)) {
+        if (!isNotDuplicatedNumber(firstNumber, secondNumber, thirdNumber)) {
             return false;
         }
 
@@ -60,7 +60,7 @@ public class BaseBallValidateUtils {
         return true;
     }
 
-    private static boolean isDuplicateNumber(int ...numbers) {
+    public static boolean isNotDuplicatedNumber(int ...numbers) {
         Set<Integer> numberSets = new HashSet<>();
 
         for (int number : numbers) {

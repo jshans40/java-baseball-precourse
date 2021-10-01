@@ -2,24 +2,34 @@ package baseball;
 
 import nextstep.utils.Console;
 import nextstep.utils.Randoms;
-import utils.BaseBallValidateUtils;
+import utils.BaseballValidateUtils;
+
+import java.util.Arrays;
 
 public class Application {
     private static boolean isGameFinish = false;
     private static boolean isUserInputFinish = false;
 
     public static void main(String[] args) {
-        createOpponentNumber();
+        int[] opponentNumbers = createOpponentNumber();
         while (!isGameFinish) {
             isUserInputFinish = false;
             userInputLoop();
+
         }
 
     }
 
-    private static void createOpponentNumber() {
+    private static int[] createOpponentNumber() {
+        boolean isCompletedOpponentNumbers = false;
+        Opponent opponent = null;
 
-        Randoms.pickNumberInRange(1, 9);
+        while (!isCompletedOpponentNumbers) {
+            opponent = new Opponent(Randoms.pickNumberInRange(1, 9), Randoms.pickNumberInRange(1, 9), Randoms.pickNumberInRange(1, 9));
+            isCompletedOpponentNumbers = opponent.isNotDuplicateNumber();
+        }
+
+        return opponent.getOpponentNumbersArray();
     }
 
     private static void userInputLoop() {
@@ -33,7 +43,7 @@ public class Application {
         String userInput = null;
         while (!isCorrectUserInput) {
             userInput = Console.readLine();
-            isCorrectUserInput = BaseBallValidateUtils.validateUserInput(userInput);
+            isCorrectUserInput = BaseballValidateUtils.validateUserInput(userInput);
         }
 
         isUserInputFinish = true;
