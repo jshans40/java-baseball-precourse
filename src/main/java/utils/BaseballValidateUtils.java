@@ -37,27 +37,34 @@ public class BaseballValidateUtils {
     }
 
     private static boolean validateRangeWithDuplicate(String userInput) {
-        int firstNumber = Integer.parseInt(String.valueOf(userInput.charAt(0)));
-        int secondNumber = Integer.parseInt(String.valueOf(userInput.charAt(1)));
-        int thirdNumber = Integer.parseInt(String.valueOf(userInput.charAt(2)));
+        int[] numbers = stringToInt(userInput);
 
-        if (!isNotDuplicatedNumber(firstNumber, secondNumber, thirdNumber)) {
+        if (!isNotDuplicatedNumber(numbers[0], numbers[1], numbers[2])) {
             return false;
         }
 
-        if (firstNumber <= 0 || firstNumber > 9) {
+        if (numbers[0] <= 0 || numbers[0] > 9) {
             return false;
         }
 
-        if (secondNumber <= 0 || secondNumber > 9) {
+        if (numbers[1] <= 0 || numbers[1] > 9) {
             return false;
         }
 
-        if (thirdNumber <= 0 || thirdNumber > 9) {
+        if (numbers[2] <= 0 || numbers[2] > 9) {
             return false;
         }
 
         return true;
+    }
+
+    public static int[] stringToInt(String value) {
+        int[] numbers = new int[3];
+        numbers[0] = Integer.parseInt(String.valueOf(value.charAt(0)));
+        numbers[1] = Integer.parseInt(String.valueOf(value.charAt(1)));
+        numbers[2] = Integer.parseInt(String.valueOf(value.charAt(2)));
+
+        return numbers;
     }
 
     public static boolean isNotDuplicatedNumber(int ...numbers) {
@@ -74,12 +81,36 @@ public class BaseballValidateUtils {
         return true;
     }
 
-    private static boolean isInteger(char charUserInput) {
+    public static boolean isInteger(char charUserInput) {
         try {
             Integer.parseInt(String.valueOf(charUserInput));
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean isValidateGameRestartInput(String userInput) {
+        if (userInput == null) {
+            System.out.println("[ERROR]");
+            return false;
+        }
+
+        if (userInput.length() != 1) {
+            System.out.println("[ERROR]");
+            return false;
+        }
+
+        if (!BaseballValidateUtils.isInteger(userInput.charAt(0))) {
+            System.out.println("[ERROR]");
+            return false;
+        }
+
+        if (Integer.parseInt(String.valueOf(userInput.charAt(0))) == 0 || Integer.parseInt(String.valueOf(userInput.charAt(0))) > 2) {
+            System.out.println("[ERROR]");
+            return false;
+        }
+
+        return true;
     }
 }
