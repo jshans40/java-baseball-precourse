@@ -15,17 +15,19 @@ public class Baseball {
         List<Integer> opponentNumberList = new ArrayList<>();
         List<Integer> userNumberList = new ArrayList<>();
 
-        for (int opponentNumber : opponentNumbers) {
-            opponentNumberList.add(opponentNumber);
-        }
+        addNumberArrayToList(opponentNumbers, opponentNumberList);
 
-        for (int userNumber : userNumbers) {
-            userNumberList.add(userNumber);
-        }
+        addNumberArrayToList(userNumbers, userNumberList);
 
         this.opponentNumberList = opponentNumberList;
         this.userNumberList = userNumberList;
         this.removeNumberList = new ArrayList<>();
+    }
+
+    private void addNumberArrayToList(int[] opponentNumbers, List<Integer> opponentNumberList) {
+        for (int opponentNumber : opponentNumbers) {
+            opponentNumberList.add(opponentNumber);
+        }
     }
 
     public boolean isGameFinish() {
@@ -33,18 +35,25 @@ public class Baseball {
     }
 
     private boolean compareOppnonentNumbersWithUserNumbers() {
-        Set<Integer> numbers = new HashSet<>();
-        for (int opponentNumber : opponentNumberList) {
-            numbers.add(opponentNumber);
+        Set<Integer> numbers = addNumbersToHashSet();
+        Boolean gameFinish = calculateGameFinish(numbers);
+        if (gameFinish != null) {
+            return gameFinish;
         }
 
-        for (int userNumber : userNumberList) {
-            numbers.add(userNumber);
-        }
+        calculateStrike();
+        calculateBall();
+        printStrikeBall();
+        return false;
+    }
 
+    /**
+     *  계산이 종료되기 전에는 3스트라이크, 낫싱이 있는데,
+     *  스트라이크 볼을 계산하기 전 3스트라이크, 낫싱을 먼저 계산하여 효율을 높인다.
+     */
+    private Boolean calculateGameFinish(Set<Integer> numbers) {
         if (opponentNumberList.equals(userNumberList)) {
-            System.out.println("3스트라이크");
-            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+            System.out.println("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 끝");
             return true;
         }
 
@@ -53,21 +62,40 @@ public class Baseball {
             return false;
         }
 
+        return null;
+    }
+
+    private void calculateStrike() {
         for (int i=0; i<opponentNumberList.size(); i++) {
             discriminationStrike(i);
         }
+    }
 
-        for (Integer removeNumber : removeNumberList) {
-            opponentNumberList.remove(removeNumber);
-            userNumberList.remove(removeNumber);
-        }
+    private void calculateBall() {
+        removeNumbers();
 
         userNumberList.retainAll(opponentNumberList);
 
         ball = userNumberList.size();
+    }
 
-        printStrikeBall();
-        return false;
+    private void removeNumbers() {
+        for (Integer removeNumber : removeNumberList) {
+            opponentNumberList.remove(removeNumber);
+            userNumberList.remove(removeNumber);
+        }
+    }
+
+    private Set<Integer> addNumbersToHashSet() {
+        Set<Integer> numbers = new HashSet<>();
+        for (int opponentNumber : opponentNumberList) {
+            numbers.add(opponentNumber);
+        }
+
+        for (int userNumber : userNumberList) {
+            numbers.add(userNumber);
+        }
+        return numbers;
     }
 
     public void discriminationStrike(int index) {

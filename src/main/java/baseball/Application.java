@@ -33,15 +33,22 @@ public class Application {
             isValidateGameRestartInput = BaseballValidateUtils.isValidateGameRestartInput(finishUserInput);
         }
 
-        if (finishUserInput != null && Integer.parseInt(String.valueOf(finishUserInput.charAt(0))) == 2) {
+        if (isUserInputGameFinish(finishUserInput)) {
             return false;
+        }
+
+        return true;
+    }
+
+    private static boolean isUserInputGameFinish(String finishUserInput) {
+        if (finishUserInput != null && Integer.parseInt(String.valueOf(finishUserInput.charAt(0))) == 2) {
+            return true;
         }
 
         if (finishUserInput != null && Integer.parseInt(String.valueOf(finishUserInput.charAt(0))) == 1) {
             opponentNumbers = createOpponentNumber();
         }
-
-        return true;
+        return false;
     }
 
     private static int[] createOpponentNumber() {
