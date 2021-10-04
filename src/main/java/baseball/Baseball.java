@@ -7,16 +7,11 @@ import java.util.*;
 public class Baseball {
     private int ball;
     private int strike;
-    private int[] opponentNumbers;
-    private int[] userNumbers;
     private List<Integer> opponentNumberList;
     private List<Integer> userNumberList;
     private List<Integer> removeNumberList;
 
     public Baseball(int[] opponentNumbers, int[] userNumbers) {
-        this.opponentNumbers = opponentNumbers;
-        this.userNumbers = userNumbers;
-
         List<Integer> opponentNumberList = new ArrayList<>();
         List<Integer> userNumberList = new ArrayList<>();
 
@@ -39,15 +34,15 @@ public class Baseball {
 
     private boolean compareOppnonentNumbersWithUserNumbers() {
         Set<Integer> numbers = new HashSet<>();
-        for (int opponentNumber : opponentNumbers) {
+        for (int opponentNumber : opponentNumberList) {
             numbers.add(opponentNumber);
         }
 
-        for (int userNumber : userNumbers) {
+        for (int userNumber : userNumberList) {
             numbers.add(userNumber);
         }
 
-        if (Arrays.equals(opponentNumbers, userNumbers)) {
+        if (opponentNumberList.equals(userNumberList)) {
             System.out.println("3스트라이크");
             System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
             return true;
@@ -58,7 +53,7 @@ public class Baseball {
             return false;
         }
 
-        for (int i=0; i<opponentNumbers.length; i++) {
+        for (int i=0; i<opponentNumberList.size(); i++) {
             discriminationStrike(i);
         }
 
@@ -76,9 +71,9 @@ public class Baseball {
     }
 
     public void discriminationStrike(int index) {
-        if (opponentNumbers[index] == userNumbers[index]) {
+        if (opponentNumberList.get(index) == userNumberList.get(index)) {
             strike++;
-            removeNumberList.add(opponentNumbers[index]);
+            removeNumberList.add(opponentNumberList.get(index));
         }
     }
 
