@@ -73,7 +73,7 @@ public class BaseballValidateUtils {
         for (int number : numbers) {
             numberSets.add(number);
         }
-
+        
         if (numberSets.size() != numbers.length) {
             return false;
         }
