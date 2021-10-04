@@ -4,8 +4,6 @@ import nextstep.utils.Console;
 import nextstep.utils.Randoms;
 import utils.BaseballValidateUtils;
 
-import java.util.Arrays;
-
 public class Application {
     private static boolean isGameFinish = false;
     private static boolean isUserInputFinish = false;
@@ -24,6 +22,16 @@ public class Application {
     }
 
     private static boolean isGameRestart(boolean isGameFinish) {
+        String finishUserInput = gameRestartLoop(isGameFinish);
+
+        if (isUserInputGameFinish(finishUserInput)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static String gameRestartLoop(boolean isGameFinish) {
         boolean isValidateGameRestartInput = false;
 
         String finishUserInput = null;
@@ -32,12 +40,7 @@ public class Application {
             finishUserInput = Console.readLine();
             isValidateGameRestartInput = BaseballValidateUtils.isValidateGameRestartInput(finishUserInput);
         }
-
-        if (isUserInputGameFinish(finishUserInput)) {
-            return false;
-        }
-
-        return true;
+        return finishUserInput;
     }
 
     private static boolean isUserInputGameFinish(String finishUserInput) {
