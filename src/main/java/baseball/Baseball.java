@@ -61,7 +61,6 @@ public class Baseball {
             System.out.println("낫싱");
             return false;
         }
-
         return null;
     }
 
@@ -114,7 +113,6 @@ public class Baseball {
         if (ball != 0) {
             print += " " + ball + "볼";
         }
-
         System.out.println(print);
     }
 }
