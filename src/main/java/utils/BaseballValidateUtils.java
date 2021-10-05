@@ -5,8 +5,7 @@ import java.util.Set;
 
 public class BaseballValidateUtils {
     public static boolean validateUserInput(String userInput) {
-        if (userInput == null || userInput.length() != 3) {
-            System.out.println("[ERROR]");
+        if (!checkUserInputLength(userInput, 3)) {
             return false;
         }
 
@@ -14,6 +13,16 @@ public class BaseballValidateUtils {
             System.out.println("[ERROR]");
             return false;
         }
+
+        return true;
+    }
+
+    private static boolean checkUserInputLength(String userInput, int length) {
+        if (userInput == null || userInput.length() != length) {
+            System.out.println("[ERROR]");
+            return false;
+        }
+
         return true;
     }
 
@@ -31,12 +40,13 @@ public class BaseballValidateUtils {
 
     private static boolean validateRangeWithDuplicate(String userInput) {
         int[] numbers = stringToInt(userInput);
-
         if (!isNotDuplicatedNumber(numbers[0], numbers[1], numbers[2])) {
             return false;
         }
 
-        if (checkNumberRange(numbers)) return false;
+        if (checkNumberRange(numbers)) {
+            return false;
+        }
 
         return true;
     }
@@ -77,8 +87,7 @@ public class BaseballValidateUtils {
     }
 
     public static boolean isValidateGameRestartInput(String userInput) {
-        if (userInput == null && userInput.length() != 1) {
-            System.out.println("[ERROR]");
+        if (!checkUserInputLength(userInput, 1)) {
             return false;
         }
 
@@ -86,6 +95,7 @@ public class BaseballValidateUtils {
             System.out.println("[ERROR]");
             return false;
         }
+
         return true;
     }
 

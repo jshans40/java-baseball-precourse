@@ -51,6 +51,7 @@ public class Application {
         if (finishUserInput != null && Integer.parseInt(String.valueOf(finishUserInput.charAt(0))) == 1) {
             opponentNumbers = createOpponentNumber();
         }
+
         return false;
     }
 
