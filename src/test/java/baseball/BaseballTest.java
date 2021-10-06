@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 class BaseballTest {
     private List<Integer> opponentNumbers;
@@ -29,16 +28,17 @@ class BaseballTest {
 
         Set<Integer> numberSet = new HashSet<>();
 
+        addNumbers(userNumbers, numberSet);
+
+        addNumbers(opponentNumbers, numberSet);
+
+        assertThat(numberSet.size()).isEqualTo(6);
+    }
+
+    private void addNumbers(List<Integer> userNumbers, Set<Integer> numberSet) {
         for (Integer userNumber : userNumbers) {
             numberSet.add(userNumber);
         }
-
-        for (Integer opponentNumber : opponentNumbers) {
-            numberSet.add(opponentNumber);
-        }
-
-
-        assertThat(numberSet.size()).isEqualTo(6);
     }
 
     @DisplayName("유저가 입력한 값의 스트라이크 갯수 확인")
@@ -62,20 +62,28 @@ class BaseballTest {
         List<Integer> overlapNumbers = new ArrayList<>();
         List<Integer> userNumbers = new ArrayList<>(Arrays.asList(8, 3, 4));
 
-        for (int i=0; i<userNumbers.size(); i++) {
-            if (userNumbers.get(i) == opponentNumbers.get(i)) {
-                overlapNumbers.add(userNumbers.get(i));
-            }
-        }
+        addNumbers(overlapNumbers, userNumbers);
 
-        for (Integer overlapNumber : overlapNumbers) {
-            userNumbers.remove(overlapNumber);
-            opponentNumbers.remove(overlapNumber);
-        }
+        removeOverlapMumbers(overlapNumbers, userNumbers);
 
         userNumbers.retainAll(opponentNumbers);
 
         assertThat(userNumbers.size()).isEqualTo(2);
+    }
+
+    private void removeOverlapMumbers(List<Integer> overlapNumbers, List<Integer> userNumbers) {
+        for (Integer overlapNumber : overlapNumbers) {
+            userNumbers.remove(overlapNumber);
+            opponentNumbers.remove(overlapNumber);
+        }
+    }
+
+    private void addNumbers(List<Integer> overlapNumbers, List<Integer> userNumbers) {
+        for (int i = 0; i< userNumbers.size(); i++) {
+            if (userNumbers.get(i) == opponentNumbers.get(i)) {
+                overlapNumbers.add(userNumbers.get(i));
+            }
+        }
     }
 
     @BeforeEach

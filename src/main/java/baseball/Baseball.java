@@ -1,7 +1,5 @@
 package baseball;
 
-import utils.BaseballValidateUtils;
-
 import java.util.*;
 
 public class Baseball {
