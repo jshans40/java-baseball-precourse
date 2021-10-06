@@ -83,4 +83,16 @@ public class Baseball {
     public void printStrikeBall() {
         PrintView.strikeBall(strike, ball);
     }
+
+    public boolean compareUserNumbersAndOpponentNumbers(List<Integer> userNumberList, List<Integer> opponentNumberList) {
+        Set<Integer> numbers = addNumbersToHashSet();
+        Boolean gameFinish = calculateGameFinish(numbers);
+        if (gameFinish != null) {
+            return gameFinish;
+        }
+
+        calculateStrikeAndBall();
+        printStrikeBall();
+        return false;
+    }
 }

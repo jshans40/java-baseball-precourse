@@ -1,6 +1,6 @@
 package baseball.controller;
 
-import baseball.service.BaseballService;
+import baseball.model.Baseball;
 import baseball.model.Opponent;
 import baseball.model.User;
 import utils.BaseballValidateUtils;
@@ -10,11 +10,9 @@ import java.util.List;
 
 public class BaseballController {
     private final User user;
-    private BaseballService baseballService;
 
     public BaseballController() {
         this.user = new User();
-        this.baseballService = new BaseballService();
     }
 
     public void gameStart() {
@@ -31,8 +29,9 @@ public class BaseballController {
     public void playUserTurn(List<Integer> opponentNumberList) {
         boolean isWin = false;
         while (!isWin) {
-            List<Integer> userNumberSet = user.createUserNumbers();
-            isWin = baseballService.compareUserNumbersAndOpponentNumbers(userNumberSet, opponentNumberList);
+            List<Integer> userNumberList = user.createUserNumbers();
+            Baseball baseball = new Baseball(opponentNumberList, userNumberList);
+            isWin = baseball.compareUserNumbersAndOpponentNumbers(userNumberList, opponentNumberList);
         }
     }
 

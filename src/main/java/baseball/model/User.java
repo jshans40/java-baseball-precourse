@@ -1,21 +1,18 @@
 package baseball.model;
 
-import baseball.service.BaseballService;
 import utils.BaseballValidateUtils;
 import utils.UserInput;
 
 import java.util.*;
 
 public class User {
-    BaseballService baseballService = new BaseballService();
-
     public List<Integer> createUserNumbers() {
         boolean validateUserInput = false;
 
         String userInput = null;
         while (!validateUserInput) {
             userInput = UserInput.inputGameNumber();
-            validateUserInput = baseballService.validateUserInput(userInput);
+            validateUserInput = validateUserInput(userInput);
         }
 
         return userInputStringToList(userInput);
@@ -31,5 +28,13 @@ public class User {
         }
 
         return userInputNumberList;
+    }
+
+    private boolean validateUserInput(String userInput) {
+        if (!BaseballValidateUtils.validateUserInput(userInput)) {
+            return false;
+        }
+
+        return true;
     }
 }
