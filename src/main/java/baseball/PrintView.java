@@ -1,11 +1,11 @@
 package baseball;
 
 public class PrintView {
-    private static String ERROR_MESSAGE = "[ERROR]";
-    private static String USER_INPUT_NUMBER = "숫자를 입력해주세요 : ";
-    private static String GAME_IS_RESTART = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
-    private static String THREE_BALL = "낫싱";
-    private static String THREE_STRIKE_GAME_END = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 끝";
+    private static final String ERROR_MESSAGE = "[ERROR]";
+    private static final String USER_INPUT_NUMBER = "숫자를 입력해주세요 : ";
+    private static final String GAME_IS_RESTART = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+    private static final String THREE_BALL = "낫싱";
+    private static final String THREE_STRIKE_GAME_END = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 끝";
 
     public static void threeBall() {
         System.out.println(THREE_BALL);
