@@ -56,35 +56,6 @@ class BaseballTest {
         assertThat(strike).isEqualTo(2);
     }
 
-    @DisplayName("유저가 입력한 값의 볼 갯수 확인")
-    @Test
-    void 유저가_입력한_값이_볼이_있는지_확인() {
-        List<Integer> overlapNumbers = new ArrayList<>();
-        List<Integer> userNumbers = new ArrayList<>(Arrays.asList(8, 3, 4));
-
-        addNumbers(overlapNumbers, userNumbers);
-
-        removeOverlapMumbers(overlapNumbers, userNumbers);
-
-        userNumbers.retainAll(opponentNumbers);
-
-        assertThat(userNumbers.size()).isEqualTo(2);
-    }
-
-    private void removeOverlapMumbers(List<Integer> overlapNumbers, List<Integer> userNumbers) {
-        for (Integer overlapNumber : overlapNumbers) {
-            userNumbers.remove(overlapNumber);
-            opponentNumbers.remove(overlapNumber);
-        }
-    }
-
-    private void addNumbers(List<Integer> overlapNumbers, List<Integer> userNumbers) {
-        for (int i = 0; i< userNumbers.size(); i++) {
-            if (userNumbers.get(i) == opponentNumbers.get(i)) {
-                overlapNumbers.add(userNumbers.get(i));
-            }
-        }
-    }
 
     @BeforeEach
     void init() {

@@ -1,5 +1,7 @@
 package utils;
 
+import baseball.PrintView;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +12,7 @@ public class BaseballValidateUtils {
         }
 
         if (!validateUserInputString(userInput)) {
-            System.out.println("[ERROR]");
+            PrintView.errorMessage("입력한 숫자를 확인해주세요. 1~9까지의 숫자중 3개의 숫자를 입력해야됩니다.");
             return false;
         }
 
@@ -19,7 +21,7 @@ public class BaseballValidateUtils {
 
     private static boolean checkUserInputLength(String userInput, int length) {
         if (userInput == null || userInput.length() != length) {
-            System.out.println("[ERROR]");
+            PrintView.errorMessage("입력한 숫자를 확인해주세요. 1~9까지의 숫자중 3개의 숫자를 입력해야됩니다.");
             return false;
         }
 
@@ -92,7 +94,7 @@ public class BaseballValidateUtils {
         }
 
         if (!BaseballValidateUtils.isInteger(userInput.charAt(0)) || !isValidateRestartInputRange(Integer.parseInt(String.valueOf(userInput.charAt(0))) )) {
-            System.out.println("[ERROR]");
+            PrintView.errorMessage("숫자만 입력 가능합니다. 1~9까지의 숫자중 3개의 숫자를 입력해야됩니다.");
             return false;
         }
 
